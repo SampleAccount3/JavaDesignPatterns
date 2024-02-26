@@ -1,9 +1,6 @@
-public class Dog implements IAnimalable{
-
-
+public class Dog extends Animal{
     @Override
-    public String sound(String suffix) {
+    public void Sound() {
         System.out.println("Woof");
-        return "";
     }
 }
