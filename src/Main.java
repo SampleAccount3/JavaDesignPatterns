@@ -3,47 +3,33 @@ import java.lang.System;
 public class Main {
     public static void main(String[] args) {
 
+        // if the Lambda has only 1 Statement it automatically returns the statement
         System.out.println("Hello World");
-        // uses the Printer class as an argument
-        Greet(new Printer()); // message
+        Dog dog = new Dog();
 
-        // anonymous Inner Class
-        Greet(new IPrintable() {
-            @Override
-            public void Print(String message) {
-                System.out.println("This is a Anonymous Inner Class" + message);
-            }
-        });
+        // Creating an instance of a Dog to Print "Woof"
+        dog.sound("!");
 
-        // lambda Expression syntax (arguments) -> Statements
-        Greet( m -> System.out.println(m)); // Hello
+        // Using the PrintThing Method to Call the IAnimalable method inside the Dog Class
+        PrintThing(dog);
 
-        // the output is same as above
-        // this is a method reference
-        Greet(System.out::println); // Hello
+        // Creating an action in the Variable type Ianimalable
+         IAnimalable Lambda = (s) -> "Woof"+s;
 
-        // assigning a lambda expression in a variable
-        IPrintable iPrintable = System.out::println;
-        iPrintable.Print("Iam the assigned Lambda");
+        // Using the Lambda variable as an argument for the PrintThing
+        PrintThing(Lambda);
+        System.out.println(Lambda.sound(""));
 
-        Arithmetic arithmetic = new Arithmetic();
+        int x = 2,y = 5;
+        IAnimalable Lambda2 = (s) -> "Kangkong" + s + (x + y);
+        PrintThing(Lambda2);
 
-        System.out.println( Add(new Arithmetic()));
-//        System.out.println( Add((x,y)-> arithmetic::Compute(x,y)));
-        System.out.println(Add(arithmetic));
-
-        INumberable iNumberable = (x,y) -> Add(arithmetic::Compute);
-
-
-        System.out.println( iNumberable.Compute(2,1));
+        System.out.println(PrintThingReturn(Lambda));
     }
-
-    public static void Greet(IPrintable iPrintable){
-        iPrintable.Print("Hello");
-        iPrintable.Print("Hello2");
+    public static void PrintThing(IAnimalable iAnimalable){
+        iAnimalable.sound("!");
     }
-
-    public static float Add(INumberable iNumberable){
-        return iNumberable.Compute(2,10);
+    public static String PrintThingReturn(IAnimalable iAnimalable){
+        return iAnimalable.sound("2");
     }
 }
