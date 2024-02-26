@@ -29,19 +29,13 @@ public class Main {
         Arithmetic arithmetic = new Arithmetic();
 
         System.out.println( Add(new Arithmetic()));
-
-        System.out.println(
-                Add(new INumberable() {
-                    @Override
-                    public float Compute(float Num1, float Num2) {
-                        return Num1 + Num2;
-                    }
-                })
-        );
-
-
 //        System.out.println( Add((x,y)-> arithmetic::Compute(x,y)));
         System.out.println(Add(arithmetic));
+
+        INumberable iNumberable = (x,y) -> Add(arithmetic::Compute);
+
+
+        System.out.println( iNumberable.Compute(2,1));
     }
 
     public static void Greet(IPrintable iPrintable){
@@ -52,6 +46,4 @@ public class Main {
     public static float Add(INumberable iNumberable){
         return iNumberable.Compute(2,10);
     }
-
-
 }
